@@ -1,4 +1,4 @@
-PROJECT := simple
+PROJECT := reflowos
 
 play:
 	ansible-playbook -i hosts.yml install.yml
@@ -21,9 +21,9 @@ create-keypair:
 	@echo "Disabled for now"
 #	ssh-keygen -t rsa -b 4096 -f id_rsa -C $(PROJECT) -N "" -q
 
+create-demouser:
+	ansible-playbook -i hosts.yml reflow_create_demo_user.yml
+
 metadata:
 	@echo "Nope, not yet"
 #	terraform refresh && terraform output ips
-
-
-

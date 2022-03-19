@@ -1,0 +1,15 @@
+---
+- name: 
+  hosts: all
+  tasks:
+
+   - name: Make reflow-os user
+     make:
+       chdir: /root/reflow-os
+       target: tasks.create_user
+       params:
+         name: demo
+         email: demo@demo.org
+         user: demo
+         pass: demo123456
+
