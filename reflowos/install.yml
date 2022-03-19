@@ -59,6 +59,10 @@
      package:
        name: docker-compose
        state: present
+   - name: install tmux
+     package:
+       name: tmux
+       state: present
 
    - name: install wireguard-tools
      package:
@@ -82,6 +86,23 @@
      make:
        chdir: /root/reflow-os
        target: config
+
+# Set Hostname in config
+   - name: "Set hostname in public.env"
+     replace:
+       path: /root/reflow-os/bonfire/flavours/reflow/config/prod/public.env
+       regexp: '(^HOSTNAME=)(.*)$'
+       replace: '\1{{inventory_hostname}}'
+       backup: yes
+# Set public port in config (regex bug means '=' put in replacement string)
+   - name: "Set public port in public.env"
+     replace:
+       path: /root/reflow-os/bonfire/flavours/reflow/config/prod/public.env
+       regexp: '(^PUBLIC_PORT)(.*)$'
+       replace: '\1=443'
+       backup: yes
+
+# Make reflow-os setup
    - name: Make reflow-os setup
      make:
        chdir: /root/reflow-os
@@ -101,10 +122,18 @@
        src: Caddyfile2.j2
        dest: /root/reflow-os/bonfire/config/deploy/Caddyfile2
 # TODO: END Current Caddyfile2 is copied from local (once fully functional, check in to repo)
-   - name: Make reflow-os bg
+
+# Use this for spawning app in background, activates caddy through bonfire/docker-compose.release.yaml
+#  - name: Make reflow-os
+#    make:
+#      chdir: /root/reflow-os
+#      target: bg
+
+# Use this for spawning app in tmux on host, no caddy through bonfire/docker-compose.yaml
+   - name: Make reflow-os run.tmux
      make:
        chdir: /root/reflow-os
-       target: bg
+       target: run.tmux
 
 # Set timezone
    - name: set timezone
@@ -112,8 +141,8 @@
        name: Europe/Berlin
 
 # Reboot when all things done
-   - reboot:
-       msg: "Reboot to finish setup."
-       reboot_timeout: 60
-     when: result.changed == "true"
+#  - reboot:
+#      msg: "Reboot to finish setup."
+#      reboot_timeout: 60
+#    when: result.changed == "true"
 
