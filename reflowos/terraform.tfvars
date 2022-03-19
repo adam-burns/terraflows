@@ -1,5 +1,5 @@
 # Projectname
-projectname = "newsrv"
+projectname = "reflowos"
 
 # OS Image
 #sourceimage = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
@@ -24,21 +24,21 @@ hosts = {
    "paris" = {
       name     = "paris",
       vcpu     = 8
-      memory   = "1024",
+      memory   = "2048",
       diskpool = "default",
       disksize = 12000000000,
    },
    "milan" = {
       name     = "milan",
       vcpu     = 8
-      memory   = "1024",
+      memory   = "2048",
       diskpool = "default",
       disksize = 12000000000,
    },
    "berlin" = {
       name     = "berlin",
       vcpu     = 8
-      memory   = "1024",
+      memory   = "2048",
       diskpool = "default",
       disksize = 12000000000,
    },
