@@ -24,6 +24,12 @@ create-keypair:
 create-demouser:
 	ansible-playbook -i hosts.yml reflow_create_demo_user.yml
 
+gql-login:
+	ansible-playbook -i hosts.yml reflow_gql_login.yml
+
+gql-unit:
+	ansible-playbook -i hosts.yml reflow_gql_default_unit.yml
+
 metadata:
 	@echo "Nope, not yet"
 #	terraform refresh && terraform output ips

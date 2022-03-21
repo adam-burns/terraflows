@@ -1,0 +1,19 @@
+---
+- name: 
+  hosts: all
+  tasks:
+  - name: Post login to GraphQL
+    uri:
+      url: http://localhost:4000/api/explore
+      method: POST
+  #   headers:
+  #      Authorization: 'bearer {{ github_token }}'
+      body_format: json
+      body:
+        query: '{{ lookup("template", "./reflow-login.graphql") }}'
+      return_content: yes
+    register: demo
+
+  - name:
+    debug:
+      msg: "demo = {{ demo.json.data.login.token }}"

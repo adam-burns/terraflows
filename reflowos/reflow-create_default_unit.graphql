@@ -1,0 +1,12 @@
+mutation {
+  createUnit(unit: {
+    label:"unit",
+    symbol:"u"
+  }) {
+    unit {
+      id
+      label
+      symbol
+    }
+  }
+}
