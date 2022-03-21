@@ -1,0 +1,6 @@
+mutation {
+  login(emailOrUsername: "demo@demo.org", password:"demo123456") {
+    currentUsername
+    token
+  }
+}
