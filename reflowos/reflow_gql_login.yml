@@ -16,4 +16,4 @@
 
   - name:
     debug:
-      msg: "demo = {{ demo.json.data.login.token }}"
+      msg: "demo.json.data.login.token = {{ demo.json.data.login.token }}"
